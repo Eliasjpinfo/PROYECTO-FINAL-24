@@ -1,0 +1,19 @@
+{% extends 'layouts/base_layout.html' %}
+{% block title_layout %}
+    {% block title %}IA | BLOG{% endblock title %}
+{% endblock title_layout %}
+{% block extra_head_layout %}
+    {% block extra_head %}{% endblock extra_head %}
+{% endblock extra_head_layout %}
+{% block content_layout %}
+    {% include 'components/common/header.html' %}
+    <main class="flex justify-center min-h-[calc(100dvh-112px)] bg-green-500">
+        <div class="container mx-4 md:mx-8 lg:mx-40 py-10">
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
+    {% include 'components/common/footer.html' %}
+{% endblock content_layout %}
+
+
+

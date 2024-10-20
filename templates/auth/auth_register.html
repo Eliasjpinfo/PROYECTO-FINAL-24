@@ -1,0 +1,16 @@
+{% extends 'layouts/auth_layout.html' %}
+
+{% block title %}Registrarse | BLOG IA{% endblock title %}
+
+{% block content %}
+<div class="flex flex-col justify-center items-center">
+    <h1 class="text-center text-2xl mb-6">Registrarse</h1>
+    <form class="flex flex-col max-w-[400px] gap-4" method="post"
+enctype="multipart/form-data">
+            {% csrf_token %} {{ form.as_p }}
+        <button type="submit" class="w-full bg-green-400 py-2 rounded-lg">
+            Registrarse
+        </button>
+    </form>
+</div>
+{% endblock content %}

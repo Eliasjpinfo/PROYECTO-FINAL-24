@@ -1,0 +1,56 @@
+{% extends 'layouts/post_layout.html' %}
+
+{% block title %}ACTUALIZAR Post | BLOG IA{% endblock title %}
+
+{% block content %}
+
+<h2>Actualizar: {{ form.instance.title }}</h2>
+
+{% if user.is_authenticated %}
+    <form method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-start w-[400px] gap-4">
+        {% csrf_token %}
+        
+        <div class="flex flex-col">{{ form.title.label_tag }} {{ form.title }}</div>
+        <div class="flex flex-col">{{ form.content.label_tag }} {{ form.content }}</div>
+        <div class="flex gap-4">{{ form.allow_comments.label_tag }} {{ form.allow_comments }}</div>
+
+        <h3>Imágenes cargadas</h3>
+        <div class="flex flex-col gap-4">
+            {% for active_img in form.active_images %}
+                <p>
+                    <a href="{{ active_img.image.url }}" target="_blank">
+                        <img
+                            class="inline-flex w-[200px] aspect-[16/9] object-cover"
+                            src="{{ active_img.image.url }}"
+                            alt="Portada {{ active_img.id }} del post"
+                        />
+                    </a>
+                    <input
+                        type="checkbox"
+                        name="keep_image_{{ active_img.id }}"
+                        id="keep_image_{{ active_img.id }}"
+                        checked
+                    />
+                    <label for="keep_image_{{ active_img.id }}">Activa</label>
+                </p>
+            {% endfor %}
+        </div>
+
+        <h3>Cargar nuevas imágenes</h3>
+        <input type="file" name="images" multiple />
+
+        <div class="flex gap-2">
+            <a href="{% url 'post:post_detail' slug=form.instance.slug %}" class="bg-red-500 text-white p-2 rounded-md">Cancelar</a>
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md">Guardar cambios</button>
+        </div>
+    </form>
+
+{% else %}
+    <p>Debes estar logueado para editar un post. 
+        <a href="{% url 'user:auth_login' %}">Inicia sesión</a>
+    </p>
+    <a href="{% url 'post:post_detail' slug=object.slug %}">Cancelar</a>
+{% endif %}
+
+{% comment %} <a href="javascript:history.back()">Cancelar</a> {% endcomment %}
+{% endblock content %}

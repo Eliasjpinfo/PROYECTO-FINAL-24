@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+
+<html lang="es" data-bs-theme="dark">
+    <head class="heard">
+        {% load static %}
+        
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+        <title>{% block title_layout %}{% endblock title_layout %}</title>
+      
+        
+
+        {% block extra_head_layout %}{% endblock extra_head_layout %}
+    </head>
+    <body class="min-w">
+        {% block content_layout %}{% endblock content_layout %}
+    </body>
+</html>
+
+<link
+    rel="shortcut icon"
+    href="{% static 'assets/favicon.ico' %}"
+    type="image/x-icon"
+/>
+
+<script src="{% static 'js/tailwind.config.js' %}"></script>
+

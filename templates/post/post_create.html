@@ -1,0 +1,24 @@
+{% extends 'layouts/post_layout.html' %}
+
+{% block title %}Post | BLOG IA{% endblock title %}
+
+{% block content %}
+
+<h2>Crear nuevo post</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="post-2">
+        <p class="post-3">{{ form.title.label_tag }} {{ form.title }}</p>
+        <p class="post-3">
+            <label for="id_content">Contenido:</label> {{ form.content }}
+        </p>
+        <p class="post-3">{{ form.allow_comments.label_tag }} {{ form.allow_comments }}</p>
+        <p class="post-3"><input type="file" name="images" multiple /></p>
+    </div>
+
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded-lg">
+        Crear Post
+    </button>
+</form>
+
+{% endblock content %}

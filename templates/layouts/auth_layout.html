@@ -1,0 +1,17 @@
+{% extends 'layouts/base_layout.html' %}
+
+{% block title_layout %}
+    {% block title %}IA | BLOG{% endblock title %}
+{% endblock title_layout %}
+
+{% block extra_head_layout %}
+    {% block extra_head %}{% endblock extra_head %}
+{% endblock extra_head_layout %}
+
+{% block content_layout %}
+    <main class="flex justify-center min-h-[100dvh] bg-white-200">
+        <div class="container mx-4 md:mx-8 lg:mx-40 py-10 bg-green-100">
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
+{% endblock content_layout %}

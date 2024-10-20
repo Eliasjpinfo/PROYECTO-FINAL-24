@@ -1,0 +1,15 @@
+<header>
+    <div class="logo">
+        <h1><a href="{% url 'home' %}">Mi Blog</a></h1>
+    </div>
+    <nav>
+        <ul class="navigation">
+            <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Inicio</a></li>
+            <li><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">Acerca de</a></li>
+            <li><a href="{% url 'posts' %}" class="{% if request.path == '/posts/' %}active{% endif %}">Posts</a></li>
+            <li><a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contacto</a></li>
+            <li><a href="{% url 'login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Iniciar Sesión</a></li>
+        </ul>
+    </nav>
+</header>
+

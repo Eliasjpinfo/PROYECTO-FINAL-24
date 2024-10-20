@@ -1,0 +1,22 @@
+{% extends 'layouts/post_layout.html' %}
+
+{% block title %}BORRAR Post | BLOG IA{% endblock title %}
+
+{% block content %}
+<h2>¿Estás seguro de que deseas eliminar este post?</h2>
+
+{% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sí, eliminar</button>
+    </form>
+    <a href="{% url 'post:post_detail' slug=object.slug %}">Cancelar</a>
+{% else %}
+    <p>Debes estar logueado para eliminar un post. 
+        <a href="{% url 'user:auth_login' %}">Inicia sesión</a>
+    </p>
+    <a href="{% url 'post:post_detail' slug=object.slug %}">Cancelar</a>
+{% endif %}
+
+{% comment %} <a href="javascript:history.back()">Cancelar</a> {% endcomment %}
+{% endblock content %}

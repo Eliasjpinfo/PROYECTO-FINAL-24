@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Mi Blog{% endblock title %}
+
+{% block content %}
+    <h2>Últimas Publicaciones</h2>
+    <div class="posts">
+        {% for post in posts %}
+            <article>
+                <h3><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;">
+                {% endif %}
+                <p>{{ post.content|truncatewords:30 }}</p>
+                <p><small>Publicado el {{ post.creation_date }}</small></p>
+            </article>
+        {% empty %}
+            <p>No hay publicaciones disponibles.</p>
+        {% endfor %}
+    </div>
+{% endblock content %}

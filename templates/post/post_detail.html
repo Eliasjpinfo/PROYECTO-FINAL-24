@@ -1,0 +1,94 @@
+{% extends 'layouts/post_layout.html' %}
+
+{% block title %}Post | BLOG IA{% endblock title %}
+
+{% block content %}
+
+{% if active_images %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {% for img in active_images %}
+            <a href="{{ img.image.url }}" target="_blank">
+                <img
+                    src="{{ img.image.url }}"
+                    alt="Portada del post {{ img.id }}"
+                    class="w-[400px] object-cover aspect-[16/9]">
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<h3 class="text-2xl uppercase font-bold">{{ post.title }}</h3>
+
+<p>{{ post.content }}</p>
+<p>Publicado por: <strong class="font-bold">{{ post.author.username }}</strong>
+</p>
+<p>Fecha de publicación: {{ post.creation_date }}</p>
+<p>Comentarios permitidos: {{ post.allow_comments|yesno:"Si,No" }}</p>
+<div class="flex mt-8 gap-4">
+    <a
+        class="bg-blue-500 text-white p-2 rounded-lg"
+        href="{% url 'post:post_update' slug=post.slug %}"
+    >Editar post</a>
+    <a
+        class="bg-red-500 text-white p-2 rounded-lg"
+        href="{% url 'post:post_delete' slug=post.slug %}"
+    >Eliminar post</a>
+</div>
+
+<!-- Listado de comentarios -->
+<h4 class="mt-8 mb-4">Comentarios</h4>
+{% if post.comments.count > 0 %}
+    <ul>
+        {% for comment in post.comments.all %}
+            <li class="mb-8">
+                {% if comment.id == editing_comment_id %}
+                    <!-- Formulario de actualización -->
+                    <form method="post" action="{% url 'post:comment_update' comment.id %}">
+                        {% csrf_token %}
+                    <p class="flex flex-col">{{ edit_comment_form.content.label_tag }} {{edit_comment_form.content }}</p>
+                    <button type="submit" class="text-blue-500">Actualizar</button>
+                    <a href="{% url 'post:post_detail' post.slug %}" class="text-red-500">Cancelar</a>
+                    </form>
+                {% elif comment.id == deleting_comment_id %}
+                    <!-- Formulario de confirmación de eliminación -->
+                    <form method="post" action="{% url 'post:comment_delete' comment.id %}">
+                        {% csrf_token %}
+                        <p>¿Estás seguro de que deseas eliminar este comentario?</p>
+                        <button type="submit" class="text-blue-500">Confirmar</button>
+                        <a href="{% url 'post:post_detail' post.slug %}" class="text-red-500">Cancelar</a>
+                    </form>
+                {% else %}   
+                    <!-- Comentario -->
+                    <p>{{ comment.content }}</p>
+                    <small>Escrito por <strong>{{ comment.author.username }}</strong> el {{comment.creation_date }}</small>
+                    {% if comment.author == user %}
+                        <a href="?edit_comment={{ comment.id }}" class="text-blue-500">Editar</a>
+                        <a href="?delete_comment={{ comment.id }}" class="text-red-500">Eliminar</a>
+                    {% elif user.is_collaborator and post.author == user and not comment.author.is_admin and not comment.author.is_superuser or user.is_superuser or user.is_admin %}
+                        <a href="?delete_comment={{ comment.id }}" class="text-red-500">Eliminar</a>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay comentarios aún.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <h4>Agregar un comentario</h4>
+    <form method="post" action="{% url 'post:comment_create' post.slug %}">
+        {% csrf_token %}
+        <p class="flex flex-col mt-4 mb-8">{{ add_comment_form.content.label_tag }} {{add_comment_form.content }}</p>
+        <button type="submit" class="bg-blue-500 text-white p-2 rounded-lg">Agregar comentario</button>
+    </form>
+{% else %}
+    <p>
+        <a href="{% url 'user:auth_login' %} %}?next={{ request.path }}" class="hover:text-blue-500">
+            Inicia sesión
+        </a>
+        para agregar un comentario.
+    </p>
+{% endif %}
+
+{% endblock content %}

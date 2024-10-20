@@ -1,0 +1,24 @@
+<nav>
+    <ul class="flex gap-4">
+        {% if user.is_authenticated %}
+            <strong>{{ user.alias }}</strong>
+            {% if user.is_collaborator %}
+                <li><a href="{% url 'post:post_create' %}">Publicar</a></li>
+            {% endif %}
+            <li><a href="{% url 'user:user_profile' %}">Perfil</a></li>
+            <li><a href="{% url 'post:post_list' %}">Posts</a></li>
+            <li>
+                <form 
+                    method="post" 
+                    action="{% url 'user:auth_logout' %}?next={{ request.path }}">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+            </li>
+        {% else %}
+            <li><a href="{% url 'post:post_list' %}">Posts</a></li>
+            <li><a href="{% url 'user:auth_login' %}">Iniciar sesión</a></li>
+            <li><a href="{% url 'user:auth_register' %}">Registrarse</a></li>
+        {% endif %}
+    </ul>
+</nav>

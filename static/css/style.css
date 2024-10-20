@@ -1,0 +1,119 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    #ee7724,
+    #d8363a,
+    #dd3675,
+    #b44593
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+  }
+}
+
+.btn-bd-primary {
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+  --bs-btn-hover-border-color: #{shade-color($bd-violet, 10%)};
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
+  --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
+}
+
+.border-success {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important;
+}
+
+.btn {
+  padding: .55rem 1.5rem .45rem;
+}
+
+.carousel-image {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+
+
+header.mosthead {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-top: calc(8rem + 57px);
+  padding-bottom: 8rem;
+  background: no-repeat center center;
+  background-color: #1f0202;
+  background-size: cover;
+  background-attachment: scroll;
+}
+
+
+.post-heading, header.mosthead .site-heading {
+  color: #ff0000;
+}
+
+
+.texto-con-borde {
+  font-size: 24px; /* Ajusta el tamaño de la fuente según tus necesidades */
+  color: #fff; /* Color del texto */
+  text-shadow: -1px -1px 1px black,  
+                1px -1px 1px black,
+               -1px 1px 1px black,
+                1px 1px 1px black; /* Ajusta la distancia y el color del sombreado */
+}
+
+.oscurecer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Ajusta el valor alpha (cuarto parámetro) para cambiar la opacidad */
+}
+
+#comment-section {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.custom-link {
+  color: green; /* Cambia el color a verde */
+  /* Otros estilos personalizados si es necesario */
+}
+
+body {
+  background-image: url('../images/background.jpg'); /* Ruta relativa a la carpeta de imágenes */
+  background-size: cover; /* Asegura que la imagen cubra toda la página */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+}

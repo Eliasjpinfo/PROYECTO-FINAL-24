@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
+from .models import Publicacion
 
 
 
@@ -19,6 +20,14 @@ class PostUpdateView(TemplateView):
 
 class PostDeleteView(TemplateView):
     template_name = 'post/post_delete.html'
+
+from django.shortcuts import render
+from .models import Publicacion
+
+def inicio(request):
+    publicaciones = Publicacion.objects.all()
+    return render(request, 'inicio.html', {'publicaciones': publicaciones})
+
 
 class PostListView(ListView):
     model = Post

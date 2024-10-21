@@ -14,6 +14,17 @@ class Category(models.Model):
     def str(self):
         return self.title
 
+from django.db import models
+
+class Publicacion(models.Model):
+    titulo = models.CharField(max_length=200)
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo
+
+
 class Post(models.Model):
     id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title= models.CharField(max_length=250)

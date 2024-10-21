@@ -1,10 +1,13 @@
 from django.urls import path
 import apps.post.views as views
 from .views import home
+from .views import inicio
+
 
 app_name = 'post'
 
 urlpatterns = [
+    path('', inicio, name='inicio'),
     path('', home, name='home'),
     path('posts/', views.PostListView.as_view(), name="post_list"),
     path('posts/create', views.PostCreateView.as_view(), name="post_create"),

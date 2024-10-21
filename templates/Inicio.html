@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pantalla de Inicio</title>
+</head>
+<body>
+    <h1>Publicaciones</h1>
+    <ul>
+        {% for publicacion in publicaciones %}
+            <li>
+                <h2>{{ publicacion.titulo }}</h2>
+                <p>{{ publicacion.contenido }}</p>
+                <small>{{ publicacion.fecha_creacion }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
